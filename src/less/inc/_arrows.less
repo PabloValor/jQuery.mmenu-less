@@ -1,0 +1,23 @@
+.mm_arrow()
+{
+	content: '';
+	border: 2px solid transparent;
+	display: block;
+	width: 7px;
+	height: 7px;
+	margin-bottom: -5px;
+	position: absolute;
+	bottom: 50%;
+	
+	.mm_vendor-prefix( e("transform"), rotate( -45deg ) );
+}
+.mm_arrow-prev()
+{
+	border-right: none;
+	border-bottom: none;
+}
+.mm_arrow-next()
+{
+	border-top: none;
+	border-left: none;
+}

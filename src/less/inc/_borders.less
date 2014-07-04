@@ -1,0 +1,71 @@
+// .mm_border( @border, @pseudo, @size, @pos1, @pos2 )
+// {
+// 	&@{pseudo}
+// 	{
+// 		content: '';
+// 		border-@{border}-width: 1px;
+// 		border-@{border}-style: solid;
+// 		display: block;
+// 		@{size}: 100%;
+// 		position: absolute;
+// 		@{pos1}: 0;
+// 		@{pos2}: 0;
+// 	}
+// }
+// .mm_border-top()
+// {
+// 	.mm_border( e("top"), "before", e("width"), e("top"), e("left") );
+// }
+// .mm_border-right()
+// {
+// 	.mm_border( e("right"), "after", e("height"), e("right"), e("top") );
+// }
+// .mm_border-bottom()
+// {
+// 	.mm_border( e("bottom"), "after", e("width"), e("bottom"), e("left") );
+// }
+// .mm_border-left()
+// {
+// 	.mm_border( e("left"), "before", e("height"), e("left"), e("top") );
+// }
+
+
+.mm_border( @border, @size, @pos1, @pos2 )
+{
+    content: '';
+    border-@{border}-width: 1px;
+    border-@{border}-style: solid;
+    display: block;
+    @{size}: 100%;
+    position: absolute;
+    @{pos1}: 0;
+    @{pos2}: 0;
+}
+
+.mm_border-top()
+{
+    &:before {   
+        .mm_border( e("top"), e("width"), e("top"), e("left") );
+    }
+}
+
+.mm_border-right()
+{
+    &:after {
+        .mm_border( e("right"), e("height"), e("right"), e("top") );
+    }
+}
+
+.mm_border-bottom()
+{
+    &:after {
+        .mm_border( e("bottom"), e("width"), e("bottom"), e("left") );
+    }
+}
+
+.mm_border-left()
+{
+    &:before {
+        .mm_border( e("left"), e("height"), e("left"), e("top") );
+    }
+}

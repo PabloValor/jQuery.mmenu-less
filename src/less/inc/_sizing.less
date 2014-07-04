@@ -1,0 +1,386 @@
+//	Sizing left
+.mm_sizing( @cls: ~'',
+	@width: @mm_width, @minWidth: @mm_minWidth, @maxWidth: @mm_maxWidth,
+	@height: @mm_height, @minHeight: @mm_minHeight, @maxHeight: @mm_maxHeight
+) {
+	html.mm-opening@{cls}
+	{
+		.mm-page,
+		#mm-blocker,
+		.mm-fixed-top,
+		.mm-fixed-bottom
+		{
+			left: percentage( @width );
+		}
+	}
+	.mm-menu@{cls}
+	{
+		width: percentage( @width );
+	}
+
+    // No calculations in media queries can be made, looks like SASS is more powerful than LESS
+    // See: https://github.com/less/less.js/issues/1903
+    @var: (@minWidth / @width);
+	@media all and (max-width: @var ) {
+		.mm-menu@{cls}
+		{
+			width: @minWidth;
+		}
+		html.mm-opening@{cls}
+		{
+			.mm-page,
+			#mm-blocker,
+			.mm-fixed-top,
+			.mm-fixed-bottom
+			{
+				left: @minWidth;
+			}
+		}
+	}
+    @var: (@maxWidth / @width);
+	@media all and (min-width: @var ) {
+		.mm-menu@{cls}
+		{
+			width: unit(@maxWidth, px);
+		}
+		html.mm-opening@{cls}
+		{
+			.mm-page,
+			#mm-blocker,
+			.mm-fixed-top,
+			.mm-fixed-bottom
+			{
+				left: unit(@maxWidth, px);
+			}
+		}
+	}
+}
+
+//	Sizing top/right/bottom
+.mm_sizing_position( @cls: ~'',
+	@width: @mm_width, @minWidth: @mm_minWidth, @maxWidth: @mm_maxWidth,
+	@height: @mm_height, @minHeight: @mm_minHeight, @maxHeight: @mm_maxHeight
+) {
+	// top
+	.mm-menu.mm-top@{cls}
+	{
+		height: percentage( @height );
+	}
+	html.mm-top.mm-opening@{cls}
+	{
+		.mm-page,
+		#mm-blocker,
+		.mm-fixed-top
+		{
+			top: percentage( @height );
+		}
+		.mm-fixed-bottom
+		{
+			bottom: -( percentage( @height ) );
+		}
+	}
+    @var: (@minHeight / @height);
+	@media all and ( max-height: @var ) {
+		.mm-menu.mm-top@{cls}
+		{
+			height: @minHeight;
+		}
+		html.mm-top.mm-opening@{cls}
+		{
+			.mm-page,
+			#mm-blocker,
+			.mm-fixed-top
+			{
+				top: @minHeight;
+			}
+			.mm-fixed-bottom
+			{
+				bottom: -@minHeight;
+			}
+		}
+	}
+    @var: (@maxHeight / @height);
+	@media all and ( min-height: @var ) {
+		.mm-menu.mm-top@{cls}
+		{
+			height: @maxHeight;
+		}
+		html.mm-top.mm-opening@{cls}
+		{
+			.mm-page,
+			#mm-blocker,
+			.mm-fixed-top
+			{
+				top: @maxHeight;
+			}
+			.mm-fixed-bottom
+			{
+				bottom: -@maxHeight;
+			}
+		}
+	}
+
+	// right
+	.mm-menu.mm-right@{cls}
+	{
+		width: percentage( @width );
+	}
+	html.mm-right.mm-opening@{cls}
+	{
+		.mm-page,
+		#mm-blocker,
+		.mm-fixed-top,
+		.mm-fixed-bottom
+		{
+			right: percentage( @width );
+		}
+	}
+    @var: (@minWidth / @width);
+	@media all and ( max-width: @var ) {
+		.mm-menu.mm-right@{cls}
+		{
+			width: @minWidth;
+		}
+		html.mm-right.mm-opening@{cls}
+		{
+			.mm-page,
+			#mm-blocker,
+			.mm-fixed-top,
+			.mm-fixed-bottom
+			{
+				right: @minWidth;
+			}
+		}
+	}
+    @var: (@maxWidth / @width);
+	@media all and ( min-width: @var ) {
+		.mm-menu.mm-right@{cls}
+		{
+			width: @maxWidth;
+		}
+		html.mm-right.mm-opening@{cls}
+		{
+			.mm-page,
+			#mm-blocker,
+			.mm-fixed-top,
+			.mm-fixed-bottom
+			{
+				right: @maxWidth;
+			}
+		}
+	}
+
+	// bottom
+	.mm-menu.mm-bottom@{cls}
+	{
+		height: percentage( @height );
+	}
+	html.mm-bottom.mm-opening@{cls}
+	{
+		.mm-page,
+		#mm-blocker,
+		.mm-fixed-bottom
+		{
+			bottom: percentage( @height );
+		}
+		.mm-fixed-top
+		{
+			top: -( percentage( @height ) );
+		}
+	}
+    @var: (@minHeight / @height);
+	@media all and ( max-height: @var ) {
+		.mm-menu.mm-bottom@{cls}
+		{
+			height: @minHeight;
+		}
+		html.mm-bottom.mm-opening@{cls}
+		{
+			.mm-page,
+			#mm-blocker,
+			.mm-fixed-bottom
+			{
+				bottom: @minHeight;
+			}
+			.mm-fixed-top
+			{
+				top: -@minHeight;
+			}
+		}
+	}
+    @var: (@maxHeight / @height);
+	@media all and ( min-height: @var ) {
+		.mm-menu.mm-bottom@{cls}
+		{
+			height: @maxHeight;
+		}
+		html.mm-bottom.mm-opening@{cls}
+		{
+			.mm-page,
+			#mm-blocker,
+			.mm-fixed-bottom
+			{
+				bottom: @maxHeight;
+			}
+			.mm-fixed-top
+			{
+				top: -@maxHeight;
+			}
+		}
+	}
+}
+
+//	Sizing z-position
+.mm_sizing_zposition( @cls: ~'',
+	@width: @mm_width, @minWidth: @mm_minWidth, @maxWidth: @mm_maxWidth,
+	@height: @mm_height, @minHeight: @mm_minHeight, @maxHeight: @mm_maxHeight
+) {
+	// left
+	.mm-menu@{cls}
+	{
+		&.mm-front,
+		&.mm-next
+		{
+			left: -( percentage( @width ) );
+		}
+	}
+    @var: (@minWidth / @width);
+	@media all and ( max-width: @var ) {
+		.mm-menu@{cls}
+		{
+			&.mm-front,
+			&.mm-next
+			{
+				left: -@minWidth;
+			}
+		}
+	}
+    @var: (@maxWidth / @width);
+	@media all and ( min-width: @var ) {
+		.mm-menu@{cls}
+		{
+			&.mm-front,
+			&.mm-next
+			{
+				left: -@maxWidth;
+			}
+		}
+	}
+
+	// top
+	.mm-menu.mm-top@{cls}
+	{
+		&.mm-front,
+		&.mm-next
+		{
+			top: -( percentage( @height ) );
+		}
+	}
+    @var: (@minHeight / @height);
+	@media all and ( max-height: @var ) {
+		.mm-menu.mm-top@{cls}
+		{
+			&.mm-front,
+			&.mm-next
+			{
+				top: -@minHeight;
+			}
+		}
+	}
+    @var: (@maxHeight / @height);
+	@media all and ( min-height: @var ) {
+		.mm-menu.mm-top@{cls}
+		{
+			&.mm-front,
+			&.mm-next
+			{
+				top: -@maxHeight;
+			}
+		}
+	}
+
+	// right
+	.mm-menu.mm-right@{cls}
+	{
+		&.mm-front,
+		&.mm-next
+		{
+			right: -( percentage( @width ) );
+		}
+	}
+    @var: (@minWidth / @width);
+	@media all and ( max-width: @var ) {
+		.mm-menu.mm-right@{cls}
+		{
+			&.mm-front,
+			&.mm-next
+			{
+				right: -@minWidth;
+			}
+		}
+	}
+    @var: (@maxWidth / @width);
+	@media all and ( min-width: @var ) {
+		.mm-menu.mm-right@{cls}
+		{
+			&.mm-front,
+			&.mm-next
+			{
+				right: -@maxWidth;
+			}
+		}
+	}
+
+	// bottom
+	.mm-menu.mm-bottom@{cls}
+	{
+		&.mm-front,
+		&.mm-next
+		{
+			bottom: -( percentage( @height ) );
+		}
+	}
+    @var: (@minHeight / @height);
+	@media all and ( max-height: @var ) {
+		.mm-menu.mm-bottom@{cls}
+		{
+			&.mm-front,
+			&.mm-next
+			{
+				bottom: -@minHeight;
+			}
+		}
+	}
+    @var: (@maxHeight / @height);
+	@media all and ( min-height: @var ) {
+		.mm-menu.mm-bottom@{cls}
+		{
+			&.mm-front,
+			&.mm-next
+			{
+				bottom: -@maxHeight;
+			}
+		}
+	}
+
+
+	//	Fixed elements
+	html.mm-front,
+	html.mm-opening.mm-front
+	{
+		.mm-fixed-top,
+		.mm-fixed-bottom
+		{
+			left: 0;
+			right: auto;
+		}
+		.mm-fixed-top
+		{
+			top: 0;
+		}
+		.mm-fixed-bottom
+		{
+			bottom: 0;
+		}
+	}
+}
